@@ -1,0 +1,70 @@
+version: '3.4'
+
+services:
+
+  eureka-server:
+    image: steeltoeoss/eurekaserver:latest
+    restart: on-failure
+    hostname: eureka-server
+    networks:
+       - microservice-network
+    ports:
+     - "8761:8761"
+
+  api-gateway:
+    image: vedantmaurya/apigateway:latest
+    restart: on-failure
+    ports:
+      - "80:80"
+    build:
+      context: .
+      dockerfile: API-Gateway/Dockerfile
+    networks:
+      - microservice-network
+
+  orderapi:
+    image: vedantmaurya/orderapi:latest
+    restart: on-failure
+    ports:
+      - "5196:5196"
+    build:
+      context: .
+      dockerfile: OrderAPI/Dockerfile
+    networks:
+      - microservice-network
+
+  productapi:
+    image: vedantmaurya/productapi:latest
+    restart: on-failure
+    ports:
+      - "5039:5039"
+    build:
+      context: .
+      dockerfile: ProductAPI/Dockerfile
+    networks:
+      - microservice-network
+
+  cartapi:
+    image: vedantmaurya/cartapi:latest
+    restart: on-failure
+    ports:
+      - "5235:5235"  # Expose port 5235 of CartApi service to port 5235 on the host
+      #- "443[on local system]:443[on docker img]"
+    build:
+      context: .
+      dockerfile: CartAPI/Dockerfile
+    networks:
+      - microservice-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - microservice-network
+
+
+networks:
+  microservice-network:

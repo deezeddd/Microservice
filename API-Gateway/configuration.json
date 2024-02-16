@@ -1,0 +1,239 @@
+{
+  "Routes": [
+    //Auth and prod has 7266 port locally
+    {
+      "DownstreamPathTemplate": "/Auth/GenerateToken/{Role}",
+      "DownstreamScheme": "http",
+      "Key": "Auth",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GenerateToken/{Role}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Note - HTTP is used for docker, but locally it can be used on https
+    //OrderAPI
+    //Order has 7118 port locally
+    {
+      "DownstreamPathTemplate": "/Order/GetAllOrders",
+      "DownstreamScheme": "http",
+      "Key": "Order",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderapi",
+          "Port": 5196
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetAllOrders",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/Order/GetOrderByUser/{userId}",
+      "DownstreamScheme": "http",
+      "Key": "Order",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderapi",
+          "Port": 5196
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetOrderByUser/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+
+    {
+      "DownstreamPathTemplate": "/Order/GetOrdersByProduct/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Order",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderapi",
+          "Port": 5196
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetOrdersByProduct/{productId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+
+    //CartAPI
+    //Order has 7116 port locally
+
+
+    {
+      "DownstreamPathTemplate": "/Cart/GetCartItems/{userId}",
+      "DownstreamScheme": "http",
+      "Key": "Cart",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartapi",
+          "Port": 5235
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetCartItems/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/Cart/RemoveFromCart/user/{userId}/product/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Cart",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartapi",
+          "Port": 5235
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/RemoveFromCart/user/{userId}/product/{productId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/Cart/GetAllCartItems",
+      "DownstreamScheme": "http",
+      "Key": "Cart",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartapi",
+          "Port": 5235
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetAllCartItems",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+    //PRODUCT
+
+
+    {
+      "DownstreamPathTemplate": "/Product/AddProduct",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/AddProduct",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/Product/DeleteProductById/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/DeleteProductById/{productId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/Product/GetProductById/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetProductById/{productId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/Product/GetAllProducts",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/GetAllProducts",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/Product/PlaceOrder/User/{userId}/Product/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/PlaceOrder/User/{userId}/Product/{productId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/Product/AddtoCart/User/{userId}/Product/{productId}",
+      "DownstreamScheme": "http",
+      "Key": "Product",
+
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 5039
+        }
+      ],
+      "LoadBalancer": "LeastConnection",
+      "UpstreamPathTemplate": "/AddtoCart/User/{userId}/Product/{productId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "UseServiceDiscovery": true,
+    "ServiceDiscoveryProvider": {
+      "Type": "Eureka",
+      "Host": "eureka-server",
+      "Port": "8761"
+    }
+  }
+}
