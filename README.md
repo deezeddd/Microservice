@@ -2,20 +2,20 @@
 
 
 
-## 1)A writeup of identified microservices for above use case along with reasonable explanation  
+## 1) A writeup of identified microservices for the above use case along with a reasonable explanation  
 
  
 API Gateway: This microservice serves as the entry point for client requests and handles routing, authentication, and other cross-cutting concerns. It provides a unified interface for clients to interact with the system and delegates requests to the appropriate microservices. Ocelot has been used for the same. 
 
-Order Service: Responsible for managing orders within the system. This microservice handles and communicates with the database(List in current case) allowing users to view order data and ensures consistency and integrity of order-related operations. Handles Order-related operations fetches add to cart data from Product Service using RabbitMQ.  
+Order Service: Responsible for managing orders within the system. This microservice handles and communicates with the database(List in the current case) allowing users to view order data and ensuring consistency and integrity of order-related operations. Handles Order-related operations and fetches add-to-cart data from Product Service using RabbitMQ.  
 
-Product Service: Manages product information and inventory. This microservice provides endpoints for retrieving product details, adding product inventory, and ordering and add to cart methods. It maintains a catalogue of available products and ensures accurate and up-to-date product information. Also Include AddtoCart and PlaceOrder methods for further operations which sends the product data to the Cart and Order service respectively. 
+Product Service: Manages product information and inventory. This microservice provides endpoints for retrieving product details, adding product inventory, and ordering and add-to-cart methods. It maintains a catalogue of available products and ensures accurate and up-to-date product information. Also, Include AddtoCart and PlaceOrder methods for further operations which send the product data to the Cart and Order service respectively. 
 
-Cart Service: Handles shopping cart functionality, allowing users to view items in their Cart, or remove items from their Cart. This microservice manages the state of the user's shopping cart, handles cart-related operations fetches add to cart data from Product Service using RabbitMQ. 
+Cart Service: Handles shopping cart functionality, allowing users to view items in their Cart, or remove items from their Cart. This microservice manages the state of the user's shopping cart, and handles cart-related operations fetches add to cart data from Product Service using RabbitMQ. 
 
 
 --- 
-## 2)Docker Image on docker Hub 
+## 2) Docker Image on Docker Hub 
 
 
 `docker pull -a vedantmaurya/microservice-assignment`
@@ -25,7 +25,7 @@ Cart Service: Handles shopping cart functionality, allowing users to view items 
 
 ---
 
-## 3)URL definitions of the scenarios (Sample POSTMAN collection, or request/response JSONs)  
+## 3) URL definitions of the scenarios (Sample POSTMAN collection, or request/response JSONs)  
 
  
 
@@ -47,7 +47,7 @@ Sample JSON body for adding a product via http://localhost:80/addproduct
 ```
 
 
-Also JWT auth is used in Product Service Add and remove method of product service can only be used by Admin 
+Also, JWT auth is used in the Product Service Add and remove method of product service can only be used by Admin 
 
 For fetching JWT token http://localhost:80/generatetoken/{Role}  where Role can be Admin or User which will provide the JWT token accordingly  
 
@@ -75,7 +75,7 @@ RabbitMq is used from ProductService [AddtoCart and PlaceOrder] to Cart and Orde
 ---
  
 
-For running project from source code -> Run [In WSL] 
+For running the project from source code -> Run [In WSL] 
 
 ```
 Docker compose build  
